@@ -16,4 +16,14 @@ import { unitTraits } from '@civ-clone/core-unit/Rules/UnitTraits';
 ruleRegistry.register(...unitTraits('civ2-unit:unit/trait', Fanatics, new SupportExemptUnder(Fundamentalism)));
 ```
 
+A rule that needs its parameters reads the traits themselves: `unit.traits(SupportExemptUnder)` for a unit, or
+`traitsOf(UnitClass, SupportExemptUnder, ruleRegistry)` (from `@civ-clone/core-unit/traits`) for a class. A type may be declared
+with more than one:
+
+```ts
+unit.traits(SupportExemptUnder).some((trait: SupportExemptUnder): boolean =>
+  trait.governments.some((Government) => government instanceof Government)
+);
+```
+
 Part of the unit traits design (civ-clone/web-renderer#1008).
